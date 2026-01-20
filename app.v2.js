@@ -9,11 +9,21 @@ const $ = id => document.getElementById(id);
 fetch(API)
   .then(r => r.json())
   .then(d => {
+    if (d.error) {
+      console.error(d);
+      alert("API Error – check worker response");
+      return;
+    }
     rawData = d;
     filtered = d;
     initFilters();
     renderTable(filtered);
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Failed to load data");
   });
+
 
 /* FILTER SETUP */
 function initFilters(){
