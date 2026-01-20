@@ -1,4 +1,4 @@
-const API = "PASTE_YOUR_SCRIPT_URL_HERE";
+const API = "https://script.google.com/macros/s/AKfycbziGZTCLELTj7JTarAwzM9Xf0rRzgAGH5jc5-3A96FS1A3w43LHkWrG2XOvpWA2kfXs/exec";
 let rawData = [];
 let filtered = [];
 
