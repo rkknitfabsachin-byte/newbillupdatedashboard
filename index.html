@@ -2,31 +2,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Finance Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Dashboard 25–26</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="top-bar">
-  <h1>📊 Financial Dashboard 25–26</h1>
+<header class="hud-header">
+  <h1>FINANCIAL DASHBOARD 25–26</h1>
+</header>
 
-  <input id="search" placeholder="Search Bill / Party / Item">
+<section class="filters">
+  <div class="filter-group">
+    <label>Party</label>
+    <select id="party"></select>
+  </div>
 
-  <select id="party"></select>
-  <select id="item"></select>
-  <select id="lot"></select>
-  <select id="colour"></select>
-  <select id="rate"></select>
+  <div class="filter-group">
+    <label>Item</label>
+    <select id="item"></select>
+  </div>
 
-  <button onclick="resetFilters()">Reset</button>
-</div>
+  <div class="filter-group">
+    <label>Lot No</label>
+    <select id="lot"></select>
+  </div>
 
-<div class="table-wrap">
-<table id="table">
-  <thead></thead>
-  <tbody></tbody>
-</table>
-</div>
+  <div class="filter-group">
+    <label>Colour</label>
+    <select id="colour"></select>
+  </div>
+
+  <div class="filter-group">
+    <label>Rate</label>
+    <select id="rate"></select>
+  </div>
+
+  <div class="filter-group search">
+    <label>Search</label>
+    <input id="search" placeholder="Bill / Party / Item">
+  </div>
+
+  <button class="reset-btn" onclick="resetFilters()">Reset</button>
+</section>
+
+<section class="table-wrap">
+  <table id="table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+</section>
 
 <script src="app.js"></script>
 </body>
