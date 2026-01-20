@@ -1,4 +1,4 @@
-const API = "https://script.google.com/macros/s/AKfycbziGZTCLELTj7JTarAwzM9Xf0rRzgAGH5jc5-3A96FS1A3w43LHkWrG2XOvpWA2kfXs/exec";
+const API = "https://empty-grass-b8a5.rkknitfabsachin.workers.dev";
 
 let rawData = [];
 let filtered = [];
