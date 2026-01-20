@@ -1,57 +1,97 @@
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Inter,Arial;
-  background:linear-gradient(135deg,#e0f2fe,#f8fafc);
+  background:radial-gradient(circle at top,#020617,#000);
+  color:#e5e7eb;
 }
 
-.top-bar{
-  position:sticky;
-  top:0;
+.hud-header{
+  padding:14px 18px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.hud-header h1{
+  font-size:16px;
+  letter-spacing:.12em;
+  color:#67e8f9;
+}
+
+.filters{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px;
+  padding:14px;
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.filter-group{
   display:flex;
-  gap:10px;
-  padding:15px;
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(12px);
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
-  z-index:10;
+  flex-direction:column;
+  gap:4px;
 }
 
-input,select,button{
-  padding:8px 12px;
+label{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:#67e8f9;
+}
+
+select,input{
+  padding:8px;
   border-radius:10px;
-  border:1px solid #ddd;
+  background:rgba(0,0,0,.65);
+  color:white;
+  border:1px solid rgba(103,232,249,.4);
 }
 
-button{
-  background:#2563eb;
+input::placeholder{color:#94a3b8}
+
+.reset-btn{
+  align-self:end;
+  background:#ef4444;
   color:white;
+  border:none;
+  border-radius:10px;
+  padding:10px;
   cursor:pointer;
 }
 
 .table-wrap{
-  padding:20px;
+  padding:14px;
+  overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  background:white;
-  border-radius:14px;
-  overflow:hidden;
+  min-width:900px;
 }
 
 th,td{
-  padding:12px;
-  border-bottom:1px solid #eee;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
   white-space:nowrap;
 }
 
 th{
-  background:#f1f5f9;
   position:sticky;
-  top:80px;
+  top:0;
+  background:rgba(2,6,23,.95);
+  color:#67e8f9;
+  text-transform:uppercase;
+  font-size:11px;
 }
 
 tr:hover{
-  background:#f8fafc;
+  background:rgba(103,232,249,.05);
+}
+
+@media(max-width:768px){
+  table{min-width:700px}
 }
