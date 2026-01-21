@@ -1,45 +1,46 @@
 const API = "https://empty-grass-b8a5.rkknitfabsachin.workers.dev";
 const LIMIT = 150;
 
-/* ===== STATE ===== */
+/* STATE */
 let offset = 0;
 let total = Infinity;
 let loading = false;
-
 let raw = [];
 let filtered = [];
 
-/* ===== DOM READY ===== */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---- CACHE ELEMENTS ---- */
-  const wrap = document.getElementById("dataWrap");
-  const cards = document.getElementById("cards");
-  const table = document.getElementById("table");
+  /* SAFE GETTER */
+  const $ = id => document.getElementById(id);
+
+  const wrap = $("dataWrap");
+  const cards = $("cards");
+  const table = $("table");
   const thead = table.querySelector("thead");
   const tbody = table.querySelector("tbody");
 
-  const search = document.getElementById("search");
-  const fromDate = document.getElementById("fromDate");
-  const toDate = document.getElementById("toDate");
+  const inputs = {
+    search: $("search"),
+    fromDate: $("fromDate"),
+    toDate: $("toDate"),
+    bill: $("f_bill"),
+    party: $("f_party"),
+    item: $("f_item"),
+    lot: $("f_lot"),
+    colour: $("f_colour"),
+    rate: $("f_rate"),
+    location: $("f_location")
+  };
 
-  const f_bill = document.getElementById("f_bill");
-  const f_party = document.getElementById("f_party");
-  const f_item = document.getElementById("f_item");
-  const f_lot = document.getElementById("f_lot");
-  const f_colour = document.getElementById("f_colour");
-  const f_rate = document.getElementById("f_rate");
-  const f_location = document.getElementById("f_location");
+  const sumW = $("sumW");
+  const sumA = $("sumA");
+  const sumR = $("sumR");
 
-  const sumW = document.getElementById("sumW");
-  const sumA = document.getElementById("sumA");
-  const sumR = document.getElementById("sumR");
-
-  /* ===== INITIAL LOAD ===== */
+  /* LOAD FIRST CHUNK */
   loadMore();
 
-  /* ===== SCROLL LOAD ===== */
-  wrap.addEventListener("scroll", () => {
+  /* SCROLL LOAD */
+  wrap?.addEventListener("scroll", () => {
     if (
       wrap.scrollTop + wrap.clientHeight >= wrap.scrollHeight - 200 &&
       !loading
@@ -48,14 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ===== FILTER EVENTS ===== */
-  [
-    search, fromDate, toDate,
-    f_bill, f_party, f_item,
-    f_lot, f_colour, f_rate, f_location
-  ].forEach(el => el.addEventListener("input", applyFilters));
-
-  /* ===== FUNCTIONS ===== */
+  /* FILTER EVENTS (NULL SAFE) */
+  Object.values(inputs).forEach(el => {
+    if (el) el.addEventListener("input", applyFilters);
+  });
 
   async function loadMore() {
     if (offset >= total) return;
@@ -80,20 +77,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyFilters() {
     filtered = raw.filter(r => {
-      if (fromDate.value && new Date(r.DATE) < new Date(fromDate.value)) return false;
-      if (toDate.value && new Date(r.DATE) > new Date(toDate.value)) return false;
+      if (inputs.fromDate?.value && new Date(r.DATE) < new Date(inputs.fromDate.value)) return false;
+      if (inputs.toDate?.value && new Date(r.DATE) > new Date(inputs.toDate.value)) return false;
 
-      if (f_bill.value && !String(r["BILL NUMBER"]).includes(f_bill.value)) return false;
-      if (f_party.value && r["PARTY NAME"] !== f_party.value) return false;
-      if (f_item.value && r.ITEM !== f_item.value) return false;
-      if (f_lot.value && r["LOT NO"] !== f_lot.value) return false;
-      if (f_colour.value && r.COLOUR !== f_colour.value) return false;
-      if (f_rate.value && String(r.RATE) !== f_rate.value) return false;
-      if (f_location.value && !String(r.LOCATION).includes(f_location.value)) return false;
+      if (inputs.bill?.value && !String(r["BILL NUMBER"]).includes(inputs.bill.value)) return false;
+      if (inputs.party?.value && r["PARTY NAME"] !== inputs.party.value) return false;
+      if (inputs.item?.value && r.ITEM !== inputs.item.value) return false;
+      if (inputs.lot?.value && r["LOT NO"] !== inputs.lot.value) return false;
+      if (inputs.colour?.value && r.COLOUR !== inputs.colour.value) return false;
+      if (inputs.rate?.value && String(r.RATE) !== inputs.rate.value) return false;
+      if (inputs.location?.value && !String(r.LOCATION).includes(inputs.location.value)) return false;
 
       if (
-        search.value &&
-        !JSON.stringify(r).toLowerCase().includes(search.value.toLowerCase())
+        inputs.search?.value &&
+        !JSON.stringify(r).toLowerCase().includes(inputs.search.value.toLowerCase())
       ) return false;
 
       return true;
@@ -110,9 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
       a += Number(x.TOTAL) || 0;
       r += Number(x["NO OF ROLLS"]) || 0;
     });
-    sumW.textContent = w.toFixed(2);
-    sumA.textContent = a.toFixed(2);
-    sumR.textContent = r;
+    if (sumW) sumW.textContent = w.toFixed(2);
+    if (sumA) sumA.textContent = a.toFixed(2);
+    if (sumR) sumR.textContent = r;
   }
 
   function render() {
@@ -150,7 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fill(id, col, src) {
-    document.getElementById(id).innerHTML =
+    const el = $(id);
+    if (!el) return;
+    el.innerHTML =
       [...new Set(src.map(x => x[col]).filter(Boolean))]
         .map(v => `<option value="${v}">`)
         .join("");
@@ -158,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ===== THEME ===== */
+/* THEME */
 function toggleTheme() {
   document.body.classList.toggle("light");
 }
