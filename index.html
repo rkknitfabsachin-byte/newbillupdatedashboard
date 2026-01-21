@@ -9,27 +9,50 @@
 <body>
 
 <header>
-  <h1>RK KNIT FAB – DATA DASHBOARD</h1>
+  <h1>RK KNIT FAB</h1>
   <button onclick="toggleTheme()">🌙</button>
 </header>
 
+<!-- FILTERS -->
 <section class="filters">
-  <input id="search" placeholder="Search anything">
-  <input type="date" id="fromDate">
-  <input type="date" id="toDate">
+  <input id="f_date" type="date" placeholder="Date">
+  <input id="f_bill" placeholder="Bill Number">
+
+  <input list="partyList" id="f_party" placeholder="Party">
+  <datalist id="partyList"></datalist>
+
+  <input list="itemList" id="f_item" placeholder="Item">
+  <datalist id="itemList"></datalist>
+
+  <input list="lotList" id="f_lot" placeholder="Lot No">
+  <datalist id="lotList"></datalist>
+
+  <input list="colourList" id="f_colour" placeholder="Colour">
+  <datalist id="colourList"></datalist>
+
+  <input id="f_rate" placeholder="Rate">
+  <input id="f_location" placeholder="Location">
+
+  <input id="search" placeholder="Global search">
 </section>
 
+<!-- SUMMARY -->
 <section class="summary">
-  <div><span>Total Weight</span><b id="w">0</b></div>
-  <div><span>Total Amount</span><b id="a">0</b></div>
-  <div><span>Total Rolls</span><b id="r">0</b></div>
+  <div><span>Weight</span><b id="sumW">0</b></div>
+  <div><span>Amount</span><b id="sumA">0</b></div>
+  <div><span>Rolls</span><b id="sumR">0</b></div>
 </section>
 
-<section id="tableWrap">
+<!-- DATA -->
+<section id="dataWrap">
+  <!-- Desktop table -->
   <table id="table">
     <thead></thead>
     <tbody></tbody>
   </table>
+
+  <!-- Mobile cards -->
+  <div id="cards"></div>
 </section>
 
 <script src="app.js"></script>
