@@ -3,51 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Financial Dashboard</title>
+<title>RK Knit Fab – Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="top-bar">
-  <h1>FINANCIAL DASHBOARD</h1>
-  <div class="actions">
-    <button onclick="exportCSV()">Export CSV</button>
-    <button onclick="toggleTheme()">🌙</button>
-  </div>
+<header>
+  <h1>RK KNIT FAB – DATA DASHBOARD</h1>
+  <button onclick="toggleTheme()">🌙</button>
 </header>
 
-<section class="summary">
-  <div class="card"><span>Total Weight</span><b id="sumWeight">0</b></div>
-  <div class="card"><span>Total Amount</span><b id="sumAmount">0</b></div>
-  <div class="card"><span>Total Rolls</span><b id="sumRolls">0</b></div>
-</section>
-
 <section class="filters">
-  <input list="partyList" id="party" placeholder="Party">
-  <datalist id="partyList"></datalist>
-
-  <input list="itemList" id="item" placeholder="Item">
-  <datalist id="itemList"></datalist>
-
-  <input list="lotList" id="lot" placeholder="Lot No">
-  <datalist id="lotList"></datalist>
-
-  <input list="colourList" id="colour" placeholder="Colour">
-  <datalist id="colourList"></datalist>
-
+  <input id="search" placeholder="Search anything">
   <input type="date" id="fromDate">
   <input type="date" id="toDate">
-
-  <input id="search" placeholder="Search anything">
 </section>
 
-<section class="table-wrap" id="tableWrap">
+<section class="summary">
+  <div><span>Total Weight</span><b id="w">0</b></div>
+  <div><span>Total Amount</span><b id="a">0</b></div>
+  <div><span>Total Rolls</span><b id="r">0</b></div>
+</section>
+
+<section id="tableWrap">
   <table id="table">
     <thead></thead>
     <tbody></tbody>
   </table>
 </section>
 
-<script src="app.v2.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
